@@ -30,7 +30,7 @@ export const DeliveryForecastCard = ({ onTime, early, delayed }: DeliveryForecas
               cx="50"
               cy="50"
               r="45"
-              stroke="hsl(228, 30%, 22%)"
+              stroke="hsla(0, 0%, 0%, 0.05)"
               strokeWidth="8"
               fill="none"
             />
@@ -57,7 +57,7 @@ export const DeliveryForecastCard = ({ onTime, early, delayed }: DeliveryForecas
               </linearGradient>
             </defs>
           </svg>
-          
+
           {/* Center content */}
           <div className="absolute inset-0 flex flex-col items-center justify-center">
             <motion.div

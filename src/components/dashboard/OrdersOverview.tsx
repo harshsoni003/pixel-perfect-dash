@@ -47,42 +47,43 @@ export const RecentActivityFeed = () => {
       transition={{ delay: 0.55 }}
       className="glass-card p-5 h-full"
     >
-      <div className="mb-4">
-        <h3 className="text-lg font-semibold text-foreground">Recent Activity</h3>
-        <div className="flex items-center gap-2">
-          <TrendingUp className="h-4 w-4 text-success" />
-          <span className="text-sm text-success font-medium">142 active</span>
-          <span className="text-sm text-muted-foreground">shipments</span>
+      <div className="mb-6">
+        <h3 className="text-xl font-bold tracking-tight text-slate-900">System Activity</h3>
+        <div className="flex items-center gap-2 mt-1">
+          <div className="flex h-1.5 w-1.5 rounded-full bg-success" />
+          <span className="text-sm text-slate-500 font-semibold"><span className="text-success font-bold">142</span> active operations</span>
         </div>
       </div>
 
       {/* Timeline */}
       <div className="relative">
-        {/* Vertical line */}
-        <div className="absolute left-[11px] top-2 bottom-2 w-0.5 bg-gradient-to-b from-primary to-accent opacity-30" />
+        {/* Vertical line - refined */}
+        <div className="absolute left-[15px] top-6 bottom-6 w-[1px] bg-slate-100" />
 
-        <div className="space-y-4">
+        <div className="space-y-6">
           {activities.map((activity, index) => (
             <motion.div
               key={activity.title}
               initial={{ x: -20, opacity: 0 }}
               animate={{ x: 0, opacity: 1 }}
               transition={{ delay: 0.6 + index * 0.1 }}
-              className="flex items-start gap-4 relative"
+              className="flex items-start gap-5 relative group"
             >
-              {/* Icon */}
+              {/* Icon Container */}
               <div
-                className="w-6 h-6 rounded-full flex items-center justify-center z-10 flex-shrink-0"
-                style={{ backgroundColor: activity.color }}
+                className="w-8 h-8 rounded-lg flex items-center justify-center z-10 flex-shrink-0 shadow-sm border border-white transition-all group-hover:shadow-md"
+                style={{ backgroundColor: `${activity.color}15`, color: activity.color }}
               >
-                <activity.icon className="h-3 w-3 text-foreground" />
+                <activity.icon className="h-4 w-4" />
               </div>
-              
-              {/* Content */}
-              <div className="flex-1 min-w-0">
-                <p className="text-sm font-medium text-foreground truncate">{activity.title}</p>
-                <p className="text-xs text-muted-foreground">{activity.subtitle}</p>
-                <p className="text-xs text-muted-foreground mt-0.5">{activity.time}</p>
+
+              {/* Content Container */}
+              <div className="flex-1 min-w-0 pt-0.5">
+                <div className="flex items-center justify-between mb-0.5">
+                  <p className="text-sm font-bold text-slate-900 truncate tracking-tight">{activity.title}</p>
+                  <span className="text-[10px] font-bold text-slate-400 uppercase tracking-tighter whitespace-nowrap ml-2 bg-slate-50 px-1.5 py-0.5 rounded">{activity.time}</span>
+                </div>
+                <p className="text-xs font-medium text-slate-500 line-clamp-1">{activity.subtitle}</p>
               </div>
             </motion.div>
           ))}

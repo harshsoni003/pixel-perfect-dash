@@ -6,65 +6,63 @@
 
 @layer base {
   :root {
-    --background: 0 0% 0%;
-    --foreground: 0 0% 100%;
+    --background: 210 40% 98%;
+    --foreground: 222 47% 11%;
 
-    --card: 228 47% 12%;
-    --card-foreground: 0 0% 100%;
+    --card: 0 0% 100%;
+    --card-foreground: 222 47% 11%;
 
-    --popover: 228 47% 12%;
-    --popover-foreground: 0 0% 100%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222 47% 11%;
 
-    --primary: 214 100% 50%;
-    --primary-foreground: 0 0% 100%;
+    --primary: 221.2 83.2% 53.3%;
+    --primary-foreground: 210 40% 98%;
 
-    --secondary: 228 47% 18%;
-    --secondary-foreground: 0 0% 100%;
+    --secondary: 210 40% 96.1%;
+    --secondary-foreground: 222.2 47.4% 11.2%;
 
-    --muted: 228 30% 20%;
-    --muted-foreground: 220 20% 65%;
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215.4 16.3% 46.9%;
 
-    --accent: 191 100% 49%;
-    --accent-foreground: 0 0% 100%;
+    --accent: 210 40% 96.1%;
+    --accent-foreground: 222.2 47.4% 11.2%;
 
-    --destructive: 0 84% 60%;
-    --destructive-foreground: 0 0% 100%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
 
-    --success: 142 76% 45%;
-    --success-foreground: 0 0% 100%;
+    --success: 142.1 76.2% 36.3%;
+    --success-foreground: 355.7 100% 97.3%;
 
-    --border: 228 30% 22%;
-    --input: 228 30% 22%;
-    --ring: 214 100% 50%;
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 221.2 83.2% 53.3%;
 
-    --radius: 1rem;
+    --radius: 0.75rem;
 
-    /* Custom Vision UI tokens */
-    --navy-900: 0 0% 0%;
-    --navy-800: 0 0% 6%;
-    --navy-700: 228 47% 16%;
-    --navy-600: 228 40% 22%;
-    
-    --cyan-500: 191 100% 49%;
-    --cyan-400: 191 100% 60%;
-    
-    --gradient-primary: linear-gradient(127.09deg, hsl(214 100% 50% / 0.94) 19.41%, hsl(248 100% 60% / 0.49) 76.65%);
-    --gradient-card: linear-gradient(127.09deg, hsl(228 47% 18% / 0.94) 19.41%, hsl(228 47% 12% / 0.49) 76.65%);
-    --gradient-cyan: linear-gradient(90deg, hsl(191 100% 49%) 0%, hsl(214 100% 50%) 100%);
-    --gradient-success: linear-gradient(90deg, hsl(142 76% 45%) 0%, hsl(142 76% 55%) 100%);
-    
-    --glass-bg: hsl(228 47% 12% / 0.7);
-    --glass-border: hsl(228 30% 30% / 0.3);
-    --glass-shadow: 0 8px 32px 0 hsl(227 58% 5% / 0.37);
-    
-    --sidebar-background: 228 47% 10%;
-    --sidebar-foreground: 0 0% 100%;
-    --sidebar-primary: 214 100% 50%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 228 47% 18%;
-    --sidebar-accent-foreground: 0 0% 100%;
-    --sidebar-border: 228 30% 22%;
-    --sidebar-ring: 214 100% 50%;
+    /* Executive UI Tokens */
+    --navy-900: 222 47% 11%;
+    --navy-800: 222 47% 15%;
+    --navy-700: 222 47% 20%;
+    --navy-600: 222 40% 30%;
+
+    --cyan-500: 217 91% 60%;
+    --cyan-400: 217 91% 70%;
+
+    --gradient-primary: linear-gradient(135deg, #2563eb 0%, #4f46e5 100%);
+    --gradient-card: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
+
+    --glass-bg: rgba(255, 255, 255, 0.95);
+    --glass-border: #ffffff;
+    --glass-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px -1px rgba(0, 0, 0, 0.1);
+
+    --sidebar-background: 210 40% 98%;
+    --sidebar-foreground: 222 47% 11%;
+    --sidebar-primary: 221.2 83.2% 53.3%;
+    --sidebar-primary-foreground: 210 40% 98%;
+    --sidebar-accent: 210 40% 96.1%;
+    --sidebar-accent-foreground: 222.2 47.4% 11.2%;
+    --sidebar-border: 214.3 31.8% 91.4%;
+    --sidebar-ring: 221.2 83.2% 53.3%;
   }
 }
 
@@ -80,20 +78,25 @@
 
   body {
     @apply bg-background text-foreground antialiased;
-    background: hsl(0 0% 0%);
+    background: #f8f9fa;
     min-height: 100vh;
   }
 }
 
 @layer components {
   .glass-card {
-    @apply relative overflow-hidden rounded-2xl border border-glass-border;
+    @apply relative overflow-hidden rounded-2xl border border-glass-border transition-all duration-300;
     background: var(--glass-bg);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
     box-shadow: var(--glass-shadow);
   }
-  
+
+  .glass-card:hover {
+    @apply -translate-y-1;
+    box-shadow: 0 20px 40px 0 rgba(0, 0, 0, 0.08);
+  }
+
   .glass-card-gradient {
     @apply glass-card;
     background: var(--gradient-card);
@@ -102,7 +105,7 @@
   .stat-icon {
     @apply flex h-12 w-12 items-center justify-center rounded-xl;
     background: var(--gradient-primary);
-    box-shadow: 0 4px 12px hsl(214 100% 50% / 0.3);
+    box-shadow: 0 4px 12px rgba(0, 117, 255, 0.2);
   }
 
   .sidebar-item {
@@ -112,11 +115,11 @@
   .sidebar-item-active {
     @apply sidebar-item text-white;
     background: var(--gradient-primary);
-    box-shadow: 0 4px 12px hsl(214 100% 50% / 0.3);
+    box-shadow: 0 4px 12px rgba(0, 117, 255, 0.2);
   }
 
   .sidebar-item-inactive {
-    @apply sidebar-item text-muted-foreground hover:bg-secondary hover:text-white;
+    @apply sidebar-item text-muted-foreground hover:bg-white hover:text-primary hover:shadow-sm;
   }
 
   .progress-ring {
@@ -153,9 +156,12 @@
   }
 
   @keyframes float {
-    0%, 100% {
+
+    0%,
+    100% {
       transform: translateY(0);
     }
+
     50% {
       transform: translateY(-10px);
     }
@@ -173,8 +179,22 @@
     from {
       box-shadow: 0 0 10px hsl(191 100% 49% / 0.2), 0 0 20px hsl(191 100% 49% / 0.1);
     }
+
     to {
       box-shadow: 0 0 20px hsl(191 100% 49% / 0.4), 0 0 40px hsl(191 100% 49% / 0.2);
     }
+  }
+
+  .custom-scrollbar::-webkit-scrollbar {
+    width: 4px;
+    height: 4px;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    @apply rounded-full bg-slate-200 hover:bg-slate-400 transition-colors;
   }
 }

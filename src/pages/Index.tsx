@@ -26,9 +26,9 @@ const Index = () => {
 
       {/* Main Content */}
       <main className="ml-72 p-6">
-        <Header 
-          title="Analytics & Insights" 
-          breadcrumb={["FreightFlow AI", "Dashboard"]} 
+        <Header
+          title="Analytics & Insights"
+          breadcrumb={["FreightFlow AI", "Dashboard"]}
           userRole="COO / Head of Operations"
         />
 
@@ -41,17 +41,17 @@ const Index = () => {
 
         {/* Welcome, Delivery Forecast, AI Document Engine Row */}
         <div className="grid grid-cols-12 gap-5 mb-6">
-          <div className="col-span-5">
+          <div className="col-span-4">
             <WelcomeCard />
           </div>
-          <div className="col-span-3">
+          <div className="col-span-4">
             <DeliveryForecastCard onTime={82} early={15} delayed={3} />
           </div>
           <div className="col-span-4">
-            <AIDocumentEngineCard 
-              documentsProcessed={1450} 
-              ocrAccuracy="99.8%" 
-              avgConfidence={0.96} 
+            <AIDocumentEngineCard
+              documentsProcessed={1450}
+              ocrAccuracy="99.8%"
+              avgConfidence={0.96}
             />
           </div>
         </div>

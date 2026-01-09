@@ -132,15 +132,18 @@ const LaneAnalytics = () => {
                   />
                   <Tooltip
                     contentStyle={{
-                      backgroundColor: "hsl(0, 0%, 6%)",
-                      border: "1px solid hsl(228, 30%, 22%)",
+                      backgroundColor: "rgba(255, 255, 255, 0.95)",
+                      border: "1px solid #e2e8f0",
                       borderRadius: "12px",
-                      color: "white",
+                      boxShadow: "0 10px 15px -3px rgba(0, 0, 0, 0.1)",
+                      fontSize: "12px",
+                      fontWeight: "bold",
                     }}
+                    itemStyle={{ color: "#0f172a" }}
                   />
-                  <Bar dataKey="volume" radius={[0, 4, 4, 0]}>
+                  <Bar dataKey="volume" radius={[0, 4, 4, 0]} barSize={20}>
                     {volumeChartData.map((_, index) => (
-                      <Cell key={`cell-${index}`} fill={index === 0 ? "#0075FF" : index === 1 ? "#00C6FB" : "#6C63FF"} />
+                      <Cell key={`cell-${index}`} fill={index === 0 ? "#2563eb" : index === 1 ? "#3b82f6" : "#64748b"} />
                     ))}
                   </Bar>
                 </BarChart>
@@ -155,37 +158,36 @@ const LaneAnalytics = () => {
             transition={{ delay: 0.35 }}
             className="col-span-7 glass-card p-5"
           >
-            <div className="flex items-center gap-2 mb-4">
+            <div className="flex items-center gap-2 mb-6">
               <TrendingUp className="h-4 w-4 text-success" />
-              <h3 className="text-lg font-semibold text-foreground">Top Performing Lanes</h3>
+              <h3 className="text-xl font-bold tracking-tight text-slate-900">Primary Distribution Lanes</h3>
             </div>
-            <div className="space-y-4">
+            <div className="space-y-3">
               {laneData.slice(0, 3).map((lane, index) => (
                 <motion.div
                   key={lane.lane}
                   initial={{ x: -20, opacity: 0 }}
                   animate={{ x: 0, opacity: 1 }}
                   transition={{ delay: 0.4 + index * 0.1 }}
-                  className="flex items-center justify-between p-3 rounded-xl"
-                  style={{ background: "linear-gradient(135deg, hsl(228 47% 12% / 0.5), hsl(228 47% 18% / 0.3))" }}
+                  className="flex items-center justify-between p-4 rounded-xl border border-slate-100 bg-slate-50/50 hover:bg-white hover:shadow-sm transition-all group"
                 >
                   <div className="flex items-center gap-4">
-                    <div className="w-10 h-10 rounded-xl flex items-center justify-center" style={{ background: "linear-gradient(135deg, #0075FF, #00C6FB)" }}>
-                      <Truck className="h-5 w-5 text-foreground" />
+                    <div className="w-10 h-10 rounded-xl flex items-center justify-center bg-primary/10 text-primary group-hover:bg-primary group-hover:text-white transition-all shadow-sm">
+                      <Truck className="h-5 w-5" />
                     </div>
                     <div>
-                      <p className="text-sm font-medium text-foreground">{lane.lane}</p>
-                      <p className="text-xs text-muted-foreground">{lane.volume} shipments • {lane.avgTransit} days avg</p>
+                      <p className="text-sm font-bold text-slate-900 uppercase tracking-tight">{lane.lane}</p>
+                      <p className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">{lane.volume} operations • {lane.avgTransit} day cycle</p>
                     </div>
                   </div>
-                  <div className="flex items-center gap-6">
+                  <div className="flex items-center gap-8">
                     <div className="text-right">
-                      <p className="text-sm font-bold text-foreground">${(lane.revenue / 1000).toFixed(0)}K</p>
-                      <p className="text-xs text-muted-foreground">Revenue</p>
+                      <p className="text-sm font-black text-slate-900">${(lane.revenue / 1000).toFixed(0)}K</p>
+                      <p className="text-[10px] font-bold text-slate-400 uppercase">Yield</p>
                     </div>
                     <div className="text-right">
-                      <p className="text-sm font-bold text-success">{lane.profitMargin}%</p>
-                      <p className="text-xs text-muted-foreground">Margin</p>
+                      <p className="text-sm font-black text-success">{lane.profitMargin}%</p>
+                      <p className="text-[10px] font-bold text-slate-400 uppercase">Margin</p>
                     </div>
                   </div>
                 </motion.div>
@@ -202,7 +204,7 @@ const LaneAnalytics = () => {
           className="glass-card p-5"
         >
           <h3 className="text-lg font-semibold text-foreground mb-4">All Lanes Performance</h3>
-          
+
           {/* Table Header */}
           <div className="grid grid-cols-7 gap-4 text-xs uppercase text-muted-foreground tracking-wider border-b border-border pb-3 mb-3">
             <span>Lane</span>

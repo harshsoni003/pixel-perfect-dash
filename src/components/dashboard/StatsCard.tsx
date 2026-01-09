@@ -35,7 +35,7 @@ export const StatsCard = ({ title, value, change, isPositive = true, icon: Icon,
           )}
         </div>
         <div className="stat-icon">
-          <Icon className="h-5 w-5 text-foreground" />
+          <Icon className="h-5 w-5 text-white" />
         </div>
       </div>
     </motion.div>

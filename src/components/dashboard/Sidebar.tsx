@@ -1,6 +1,7 @@
 import { LayoutDashboard, Table, FileText, Ship, MapPin, Settings, User, LogIn, HelpCircle, Truck, BarChart3 } from "lucide-react";
 import { motion } from "framer-motion";
 import { NavLink } from "react-router-dom";
+import sidebarLogo from "@/assets/sidebar-logo.png";
 
 const menuItems = [
   { icon: LayoutDashboard, label: "Dashboard", path: "/" },
@@ -22,87 +23,97 @@ export const Sidebar = () => {
       initial={{ x: -20, opacity: 0 }}
       animate={{ x: 0, opacity: 1 }}
       transition={{ duration: 0.4 }}
-      className="glass-card fixed left-4 top-4 bottom-4 w-64 flex flex-col p-4 z-50"
+      className="glass-card fixed left-4 top-4 bottom-4 w-64 flex flex-col z-50 overflow-hidden"
     >
-      {/* Logo */}
-      <div className="flex items-center gap-3 px-4 py-3 mb-6">
-        <div className="flex h-8 w-8 items-center justify-center rounded-lg" style={{ background: "linear-gradient(127.09deg, #0075FF 19.41%, #00C6FB 76.65%)" }}>
-          <Truck className="h-4 w-4 text-foreground" />
-        </div>
-        <span className="text-sm font-semibold tracking-wide text-foreground">
-          FREIGHTFLOW AI
-        </span>
-      </div>
-
-      {/* Main Navigation */}
-      <nav className="flex-1 space-y-1">
-        {menuItems.map((item, index) => (
-          <motion.div
-            key={item.label}
-            initial={{ x: -20, opacity: 0 }}
-            animate={{ x: 0, opacity: 1 }}
-            transition={{ delay: 0.1 + index * 0.05 }}
-          >
-            <NavLink
-              to={item.path}
-              className={({ isActive }) =>
-                isActive ? "sidebar-item-active" : "sidebar-item-inactive"
-              }
-            >
-              <item.icon className="h-5 w-5" />
-              {item.label}
-            </NavLink>
-          </motion.div>
-        ))}
-
-        {/* Account Pages Section */}
-        <div className="pt-6">
-          <p className="px-4 text-xs font-medium uppercase tracking-wider text-muted-foreground mb-3">
-            Account
-          </p>
-          {accountPages.map((item, index) => (
-            <motion.div
-              key={item.label}
-              initial={{ x: -20, opacity: 0 }}
-              animate={{ x: 0, opacity: 1 }}
-              transition={{ delay: 0.3 + index * 0.05 }}
-            >
-              <NavLink
-                to={item.path}
-                className={({ isActive }) =>
-                  isActive ? "sidebar-item-active" : "sidebar-item-inactive"
-                }
-              >
-                <item.icon className="h-5 w-5" />
-                {item.label}
-              </NavLink>
-            </motion.div>
-          ))}
-        </div>
-      </nav>
-
-      {/* Help Card */}
-      <motion.div
-        initial={{ y: 20, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        transition={{ delay: 0.5 }}
-        className="mt-auto rounded-2xl p-4"
-        style={{
-          background: "linear-gradient(127.09deg, rgba(6, 11, 40, 0.94) 19.41%, rgba(10, 14, 35, 0.49) 76.65%)",
-        }}
-      >
-        <div className="flex h-10 w-10 items-center justify-center rounded-xl mb-3" style={{ background: "linear-gradient(127.09deg, #0075FF 19.41%, #00C6FB 76.65%)" }}>
-          <HelpCircle className="h-5 w-5 text-foreground" />
-        </div>
-        <p className="text-sm font-medium text-foreground mb-1">Need help?</p>
-        <p className="text-xs text-muted-foreground mb-3">Contact our support team</p>
-        <button className="w-full rounded-xl py-2.5 text-xs font-semibold text-foreground uppercase tracking-wide" style={{ background: "linear-gradient(127.09deg, #0075FF 19.41%, #00C6FB 76.65%)" }}>
-          <div className="flex items-center justify-center gap-2">
-            <FileText className="h-4 w-4" />
-            Documentation
+      <div className="flex flex-col h-full">
+        {/* Logo Container */}
+        <div className="px-5 py-7">
+          <div className="flex items-center gap-3 group">
+            <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-white shadow-md border border-slate-100 overflow-hidden p-1.5 transition-all duration-300 group-hover:shadow-lg group-hover:scale-105">
+              <img
+                src={sidebarLogo}
+                alt="FreightFlow AI"
+                className="h-full w-full object-contain mix-blend-multiply contrast-[1.1]"
+              />
+            </div>
+            <span className="text-sm font-black tracking-tighter text-slate-900 transition-colors group-hover:text-primary">
+              FREIGHTFLOW <span className="text-primary">AI</span>
+            </span>
           </div>
-        </button>
-      </motion.div>
+        </div>
+
+        {/* Main Navigation - Scrollable Area */}
+        <nav className="flex-1 overflow-y-auto px-4 space-y-1 custom-scrollbar">
+          <div className="space-y-1">
+            {menuItems.map((item, index) => (
+              <motion.div
+                key={item.label}
+                initial={{ x: -20, opacity: 0 }}
+                animate={{ x: 0, opacity: 1 }}
+                transition={{ delay: 0.1 + index * 0.05 }}
+              >
+                <NavLink
+                  to={item.path}
+                  className={({ isActive }) =>
+                    isActive ? "sidebar-item-active" : "sidebar-item-inactive"
+                  }
+                >
+                  <item.icon className="h-5 w-5" />
+                  <span className="font-bold">{item.label}</span>
+                </NavLink>
+              </motion.div>
+            ))}
+          </div>
+
+          <div className="pt-8 pb-3">
+            <p className="px-4 text-[9px] font-black uppercase tracking-[0.25em] text-slate-400">
+              Account Management
+            </p>
+          </div>
+
+          <div className="space-y-1 pb-4">
+            {accountPages.map((item, index) => (
+              <motion.div
+                key={item.label}
+                initial={{ x: -20, opacity: 0 }}
+                animate={{ x: 0, opacity: 1 }}
+                transition={{ delay: 0.3 + index * 0.05 }}
+              >
+                <NavLink
+                  to={item.path}
+                  className={({ isActive }) =>
+                    isActive ? "sidebar-item-active" : "sidebar-item-inactive"
+                  }
+                >
+                  <item.icon className="h-5 w-5" />
+                  <span className="font-bold">{item.label}</span>
+                </NavLink>
+              </motion.div>
+            ))}
+          </div>
+
+          {/* Compact Help Card - Integrated into Scroll area */}
+          <motion.div
+            initial={{ y: 20, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ delay: 0.5 }}
+            className="mx-1 mt-4 mb-8 rounded-xl p-3.5 bg-slate-50 border border-slate-100 relative overflow-hidden group/help"
+          >
+            <div className="relative z-10">
+              <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-primary/10 text-primary mb-2 transition-colors group-hover/help:bg-primary group-hover/help:text-white">
+                <HelpCircle className="h-4 w-4" />
+              </div>
+              <p className="text-[10px] font-black text-slate-900 mb-0.5 uppercase tracking-wider">Expert Support</p>
+              <p className="text-[9px] font-bold text-slate-500 mb-3 leading-tight">Access executive consulting resources.</p>
+              <button className="w-full rounded-lg py-1.5 text-[8px] font-black text-white bg-slate-900 hover:bg-primary transition-all uppercase tracking-widest shadow-sm">
+                Get Help
+              </button>
+            </div>
+            {/* Subtle background decoration */}
+            <div className="absolute -right-8 -bottom-8 h-16 w-16 bg-primary/5 rounded-full blur-2xl group-hover/help:bg-primary/10 transition-all" />
+          </motion.div>
+        </nav>
+      </div>
     </motion.aside>
   );
 };

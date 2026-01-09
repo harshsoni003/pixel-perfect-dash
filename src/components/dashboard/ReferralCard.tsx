@@ -50,7 +50,7 @@ export const AIDocumentEngineCard = ({ documentsProcessed, ocrAccuracy, avgConfi
                 cx="40"
                 cy="40"
                 r="35"
-                stroke="hsl(228, 30%, 22%)"
+                stroke="hsla(0, 0%, 0%, 0.05)"
                 strokeWidth="6"
                 fill="none"
               />
@@ -77,12 +77,12 @@ export const AIDocumentEngineCard = ({ documentsProcessed, ocrAccuracy, avgConfi
                 </linearGradient>
               </defs>
             </svg>
-            
-            {/* Center content */}
-            <div className="absolute inset-0 flex flex-col items-center justify-center">
-              <span className="text-xs text-muted-foreground">Confidence</span>
-              <span className="text-xl font-bold text-foreground">{(avgConfidence * 100).toFixed(0)}%</span>
-              <span className="text-xs text-muted-foreground">Avg Score</span>
+
+            {/* Center content - specifically adjusted for perfect fit */}
+            <div className="absolute inset-0 flex flex-col items-center justify-center -space-y-0.5">
+              <span className="text-[9px] font-bold uppercase tracking-wider text-slate-400">Confidence</span>
+              <span className="text-xl font-black text-slate-900">{(avgConfidence * 100).toFixed(0)}%</span>
+              <span className="text-[9px] font-bold uppercase tracking-wider text-slate-400">Avg Score</span>
             </div>
           </div>
         </div>

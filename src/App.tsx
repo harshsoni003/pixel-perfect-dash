@@ -8,6 +8,9 @@ import Shipments from "./pages/Shipments";
 import Documents from "./pages/Documents";
 import LaneAnalytics from "./pages/LaneAnalytics";
 import Reports from "./pages/Reports";
+import Profile from "./pages/Profile";
+import Settings from "./pages/Settings";
+import SignOut from "./pages/SignOut";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -24,6 +27,9 @@ const App = () => (
           <Route path="/documents" element={<Documents />} />
           <Route path="/lane-analytics" element={<LaneAnalytics />} />
           <Route path="/reports" element={<Reports />} />
+          <Route path="/profile" element={<Profile />} />
+          <Route path="/settings" element={<Settings />} />
+          <Route path="/signout" element={<SignOut />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
