@@ -1,27 +1,14 @@
 import { motion } from "framer-motion";
-import { Users, MousePointer, DollarSign, ShoppingCart } from "lucide-react";
-import { Bar, BarChart, ResponsiveContainer, XAxis } from "recharts";
+import { AlertTriangle } from "lucide-react";
+import { Bar, BarChart, ResponsiveContainer, XAxis, Cell } from "recharts";
 
-const barData = [
-  { day: "Mon", value: 300 },
-  { day: "Tue", value: 450 },
-  { day: "Wed", value: 320 },
-  { day: "Thu", value: 500 },
-  { day: "Fri", value: 380 },
-  { day: "Sat", value: 420 },
-  { day: "Sun", value: 350 },
-  { day: "Mon2", value: 480 },
-  { day: "Tue2", value: 390 },
+const delayData = [
+  { reason: "Customs Hold", impact: 45, color: "#0075FF" },
+  { reason: "Weather", impact: 30, color: "#00C6FB" },
+  { reason: "Port Congestion", impact: 25, color: "#6C63FF" },
 ];
 
-const stats = [
-  { icon: Users, label: "Users", value: "32,984", color: "#0075FF" },
-  { icon: MousePointer, label: "Clicks", value: "2,42m", color: "#00C6FB" },
-  { icon: DollarSign, label: "Sales", value: "2,400$", color: "#0075FF" },
-  { icon: ShoppingCart, label: "Items", value: "320", color: "#00C6FB" },
-];
-
-export const ActiveUsersChart = () => {
+export const DelayRootCausesChart = () => {
   return (
     <motion.div
       initial={{ y: 20, opacity: 0 }}
@@ -32,40 +19,44 @@ export const ActiveUsersChart = () => {
       {/* Chart */}
       <div className="h-32 mb-4">
         <ResponsiveContainer width="100%" height="100%">
-          <BarChart data={barData}>
-            <XAxis dataKey="day" hide />
-            <Bar dataKey="value" fill="white" radius={[4, 4, 0, 0]} />
+          <BarChart data={delayData} layout="vertical">
+            <XAxis type="number" hide domain={[0, 50]} />
+            <Bar dataKey="impact" radius={[0, 4, 4, 0]}>
+              {delayData.map((entry, index) => (
+                <Cell key={`cell-${index}`} fill={entry.color} />
+              ))}
+            </Bar>
           </BarChart>
         </ResponsiveContainer>
       </div>
 
       {/* Title */}
       <div className="mb-4">
-        <h3 className="text-lg font-semibold text-foreground">Active Users</h3>
-        <div className="flex items-center gap-1">
-          <span className="text-sm text-success">(+23)</span>
-          <span className="text-sm text-muted-foreground">than last week</span>
+        <div className="flex items-center gap-2">
+          <AlertTriangle className="h-4 w-4 text-amber-500" />
+          <h3 className="text-lg font-semibold text-foreground">Delay Root Causes</h3>
         </div>
+        <p className="text-sm text-muted-foreground">Impact analysis for late shipments</p>
       </div>
 
       {/* Stats Grid */}
-      <div className="grid grid-cols-4 gap-3">
-        {stats.map((stat, index) => (
+      <div className="space-y-3">
+        {delayData.map((item, index) => (
           <motion.div
-            key={stat.label}
-            initial={{ y: 10, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
+            key={item.reason}
+            initial={{ x: -10, opacity: 0 }}
+            animate={{ x: 0, opacity: 1 }}
             transition={{ delay: 0.5 + index * 0.1 }}
-            className="text-center"
+            className="flex items-center justify-between"
           >
-            <div
-              className="w-10 h-10 rounded-xl flex items-center justify-center mx-auto mb-2"
-              style={{ backgroundColor: stat.color }}
-            >
-              <stat.icon className="h-5 w-5 text-foreground" />
+            <div className="flex items-center gap-2">
+              <div
+                className="w-3 h-3 rounded-full"
+                style={{ backgroundColor: item.color }}
+              />
+              <span className="text-sm text-foreground">{item.reason}</span>
             </div>
-            <p className="text-sm font-bold text-foreground">{stat.value}</p>
-            <p className="text-xs text-muted-foreground">{stat.label}</p>
+            <span className="text-sm font-bold text-foreground">{item.impact}%</span>
           </motion.div>
         ))}
       </div>

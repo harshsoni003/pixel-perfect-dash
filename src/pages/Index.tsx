@@ -1,20 +1,21 @@
-import { Wallet, Users, UserPlus, BarChart3 } from "lucide-react";
+import { Ship, TrendingUp, AlertTriangle, DollarSign, Zap, Clock } from "lucide-react";
 import { Sidebar } from "@/components/dashboard/Sidebar";
 import { Header } from "@/components/dashboard/Header";
 import { StatsCard } from "@/components/dashboard/StatsCard";
 import { WelcomeCard } from "@/components/dashboard/WelcomeCard";
-import { SatisfactionCard } from "@/components/dashboard/SatisfactionCard";
-import { ReferralCard } from "@/components/dashboard/ReferralCard";
-import { SalesOverviewChart } from "@/components/dashboard/SalesOverviewChart";
-import { ActiveUsersChart } from "@/components/dashboard/ActiveUsersChart";
-import { ProjectsTable } from "@/components/dashboard/ProjectsTable";
-import { OrdersOverview } from "@/components/dashboard/OrdersOverview";
+import { DeliveryForecastCard } from "@/components/dashboard/SatisfactionCard";
+import { AIDocumentEngineCard } from "@/components/dashboard/ReferralCard";
+import { FreightSpendChart } from "@/components/dashboard/SalesOverviewChart";
+import { DelayRootCausesChart } from "@/components/dashboard/ActiveUsersChart";
+import { LanePerformanceTable } from "@/components/dashboard/ProjectsTable";
+import { RecentActivityFeed } from "@/components/dashboard/OrdersOverview";
+import { DocumentErrorHeatmap } from "@/components/dashboard/DocumentErrorHeatmap";
 
 const statsData = [
-  { title: "Today's Money", value: "$53,000", change: "+55%", isPositive: true, icon: Wallet },
-  { title: "Today's Users", value: "2,300", change: "+5%", isPositive: true, icon: Users },
-  { title: "New Clients", value: "+3,052", change: "-14%", isPositive: false, icon: UserPlus },
-  { title: "Total Sales", value: "$173,000", change: "+8%", isPositive: true, icon: BarChart3 },
+  { title: "Active Shipments", value: "142", icon: Ship, subtitle: "Real-time tracking" },
+  { title: "On-Time Performance", value: "98.4%", change: "+2.1%", isPositive: true, icon: TrendingUp },
+  { title: "Projected Late Arrivals", value: "3", change: "$12,400 at risk", isPositive: false, icon: AlertTriangle },
+  { title: "Automation Savings MTD", value: "$45,200", change: "+$8,500 detention saved", isPositive: true, icon: Zap },
 ];
 
 const Index = () => {
@@ -25,7 +26,11 @@ const Index = () => {
 
       {/* Main Content */}
       <main className="ml-72 p-6">
-        <Header title="Dashboard" breadcrumb={["Pages", "Dashboard"]} />
+        <Header 
+          title="Analytics & Insights" 
+          breadcrumb={["FreightFlow AI", "Dashboard"]} 
+          userRole="COO / Head of Operations"
+        />
 
         {/* Stats Row */}
         <div className="grid grid-cols-4 gap-5 mb-6">
@@ -34,36 +39,43 @@ const Index = () => {
           ))}
         </div>
 
-        {/* Welcome, Satisfaction, Referral Row */}
+        {/* Welcome, Delivery Forecast, AI Document Engine Row */}
         <div className="grid grid-cols-12 gap-5 mb-6">
           <div className="col-span-5">
             <WelcomeCard />
           </div>
           <div className="col-span-3">
-            <SatisfactionCard percentage={95} />
+            <DeliveryForecastCard onTime={82} early={15} delayed={3} />
           </div>
           <div className="col-span-4">
-            <ReferralCard invited={145} bonus={1465} safetyScore={9.3} />
+            <AIDocumentEngineCard 
+              documentsProcessed={1450} 
+              ocrAccuracy="99.8%" 
+              avgConfidence={0.96} 
+            />
           </div>
         </div>
 
         {/* Charts Row */}
         <div className="grid grid-cols-12 gap-5 mb-6">
           <div className="col-span-7">
-            <SalesOverviewChart />
+            <FreightSpendChart />
           </div>
           <div className="col-span-5">
-            <ActiveUsersChart />
+            <DelayRootCausesChart />
           </div>
         </div>
 
-        {/* Projects and Orders Row */}
+        {/* Lane Performance, Activity, and Document Heatmap Row */}
         <div className="grid grid-cols-12 gap-5">
-          <div className="col-span-8">
-            <ProjectsTable />
+          <div className="col-span-5">
+            <LanePerformanceTable />
           </div>
           <div className="col-span-4">
-            <OrdersOverview />
+            <RecentActivityFeed />
+          </div>
+          <div className="col-span-3">
+            <DocumentErrorHeatmap />
           </div>
         </div>
       </main>

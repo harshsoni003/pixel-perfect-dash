@@ -1,12 +1,14 @@
 import { motion } from "framer-motion";
 
-interface SatisfactionCardProps {
-  percentage: number;
+interface DeliveryForecastCardProps {
+  onTime: number;
+  early: number;
+  delayed: number;
 }
 
-export const SatisfactionCard = ({ percentage }: SatisfactionCardProps) => {
+export const DeliveryForecastCard = ({ onTime, early, delayed }: DeliveryForecastCardProps) => {
   const circumference = 2 * Math.PI * 45;
-  const strokeDashoffset = circumference - (percentage / 100) * circumference;
+  const strokeDashoffset = circumference - (onTime / 100) * circumference;
 
   return (
     <motion.div
@@ -16,8 +18,8 @@ export const SatisfactionCard = ({ percentage }: SatisfactionCardProps) => {
       className="glass-card p-5 h-full flex flex-col"
     >
       <div className="mb-3">
-        <h3 className="text-sm font-semibold text-foreground">Satisfaction Rate</h3>
-        <p className="text-xs text-muted-foreground">From all projects</p>
+        <h3 className="text-sm font-semibold text-foreground">Delivery Forecast</h3>
+        <p className="text-xs text-muted-foreground">Predicted arrival status</p>
       </div>
 
       <div className="flex-1 flex items-center justify-center">
@@ -37,7 +39,7 @@ export const SatisfactionCard = ({ percentage }: SatisfactionCardProps) => {
               cx="50"
               cy="50"
               r="45"
-              stroke="url(#satisfactionGradient)"
+              stroke="url(#deliveryGradient)"
               strokeWidth="8"
               fill="none"
               strokeLinecap="round"
@@ -49,7 +51,7 @@ export const SatisfactionCard = ({ percentage }: SatisfactionCardProps) => {
               }}
             />
             <defs>
-              <linearGradient id="satisfactionGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+              <linearGradient id="deliveryGradient" x1="0%" y1="0%" x2="100%" y2="0%">
                 <stop offset="0%" stopColor="#0075FF" />
                 <stop offset="100%" stopColor="#00C6FB" />
               </linearGradient>
@@ -65,19 +67,25 @@ export const SatisfactionCard = ({ percentage }: SatisfactionCardProps) => {
               className="w-10 h-10 rounded-full flex items-center justify-center mb-1"
               style={{ background: "linear-gradient(127.09deg, #0075FF 19.41%, #00C6FB 76.65%)" }}
             >
-              <span className="text-lg">😊</span>
+              <span className="text-lg">📦</span>
             </motion.div>
           </div>
         </div>
       </div>
 
-      <div className="flex items-center justify-between text-xs mt-2">
-        <span className="text-muted-foreground">0%</span>
-        <div className="flex flex-col items-center">
-          <span className="text-2xl font-bold text-foreground">{percentage}%</span>
-          <span className="text-xs text-muted-foreground">Based on likes</span>
+      <div className="grid grid-cols-3 gap-2 mt-2">
+        <div className="text-center">
+          <span className="text-lg font-bold text-success">{early}%</span>
+          <p className="text-xs text-muted-foreground">Early</p>
         </div>
-        <span className="text-muted-foreground">100%</span>
+        <div className="text-center">
+          <span className="text-lg font-bold text-foreground">{onTime}%</span>
+          <p className="text-xs text-muted-foreground">On Time</p>
+        </div>
+        <div className="text-center">
+          <span className="text-lg font-bold text-destructive">{delayed}%</span>
+          <p className="text-xs text-muted-foreground">Delayed</p>
+        </div>
       </div>
     </motion.div>
   );

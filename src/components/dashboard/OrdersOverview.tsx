@@ -1,40 +1,45 @@
 import { motion } from "framer-motion";
-import { TrendingUp, ShoppingBag, Bell, CreditCard, Palette, Droplet } from "lucide-react";
+import { TrendingUp, FileText, AlertCircle, CheckCircle, Clock, Package } from "lucide-react";
 
-const orders = [
+const activities = [
   {
-    icon: ShoppingBag,
-    title: "$2400, Design changes",
-    date: "22 DEC 7:20 PM",
+    icon: FileText,
+    title: "BOL #4521 processed",
+    subtitle: "Auto-extracted 24 fields",
+    time: "2 min ago",
     color: "#0075FF",
   },
   {
-    icon: Bell,
-    title: "New order #4219423",
-    date: "21 DEC 11:21 PM",
-    color: "#0075FF",
+    icon: AlertCircle,
+    title: "Customs hold detected",
+    subtitle: "Shipment LAX-2341",
+    time: "15 min ago",
+    color: "#EF4444",
   },
   {
-    icon: CreditCard,
-    title: "Server Payments for April",
-    date: "21 DEC 9:28 PM",
-    color: "#0075FF",
+    icon: CheckCircle,
+    title: "Delivery confirmed",
+    subtitle: "Order #8823 - DFW",
+    time: "1 hr ago",
+    color: "#22C55E",
   },
   {
-    icon: Palette,
-    title: "New card added for order #3210145",
-    date: "20 DEC 3:52 PM",
-    color: "#0075FF",
+    icon: Clock,
+    title: "ETA updated",
+    subtitle: "3 shipments rescheduled",
+    time: "2 hrs ago",
+    color: "#00C6FB",
   },
   {
-    icon: Droplet,
-    title: "Unlock packages for Development",
-    date: "19 DEC 11:35 PM",
+    icon: Package,
+    title: "New shipment created",
+    subtitle: "CHI → NYC priority",
+    time: "3 hrs ago",
     color: "#0075FF",
   },
 ];
 
-export const OrdersOverview = () => {
+export const RecentActivityFeed = () => {
   return (
     <motion.div
       initial={{ y: 20, opacity: 0 }}
@@ -43,11 +48,11 @@ export const OrdersOverview = () => {
       className="glass-card p-5 h-full"
     >
       <div className="mb-4">
-        <h3 className="text-lg font-semibold text-foreground">Orders overview</h3>
+        <h3 className="text-lg font-semibold text-foreground">Recent Activity</h3>
         <div className="flex items-center gap-2">
           <TrendingUp className="h-4 w-4 text-success" />
-          <span className="text-sm text-success font-medium">+30%</span>
-          <span className="text-sm text-muted-foreground">this month</span>
+          <span className="text-sm text-success font-medium">142 active</span>
+          <span className="text-sm text-muted-foreground">shipments</span>
         </div>
       </div>
 
@@ -57,9 +62,9 @@ export const OrdersOverview = () => {
         <div className="absolute left-[11px] top-2 bottom-2 w-0.5 bg-gradient-to-b from-primary to-accent opacity-30" />
 
         <div className="space-y-4">
-          {orders.map((order, index) => (
+          {activities.map((activity, index) => (
             <motion.div
-              key={order.title}
+              key={activity.title}
               initial={{ x: -20, opacity: 0 }}
               animate={{ x: 0, opacity: 1 }}
               transition={{ delay: 0.6 + index * 0.1 }}
@@ -68,15 +73,16 @@ export const OrdersOverview = () => {
               {/* Icon */}
               <div
                 className="w-6 h-6 rounded-full flex items-center justify-center z-10 flex-shrink-0"
-                style={{ backgroundColor: order.color }}
+                style={{ backgroundColor: activity.color }}
               >
-                <order.icon className="h-3 w-3 text-foreground" />
+                <activity.icon className="h-3 w-3 text-foreground" />
               </div>
               
               {/* Content */}
               <div className="flex-1 min-w-0">
-                <p className="text-sm font-medium text-foreground truncate">{order.title}</p>
-                <p className="text-xs text-muted-foreground">{order.date}</p>
+                <p className="text-sm font-medium text-foreground truncate">{activity.title}</p>
+                <p className="text-xs text-muted-foreground">{activity.subtitle}</p>
+                <p className="text-xs text-muted-foreground mt-0.5">{activity.time}</p>
               </div>
             </motion.div>
           ))}

@@ -1,17 +1,18 @@
-import { Home, Table, CreditCard, ArrowLeftRight, User, LogIn, UserPlus, HelpCircle, FileText } from "lucide-react";
+import { LayoutDashboard, Table, FileText, Ship, MapPin, Settings, User, LogIn, UserPlus, HelpCircle, Truck } from "lucide-react";
 import { motion } from "framer-motion";
 
 const menuItems = [
-  { icon: Home, label: "Dashboard", active: true },
-  { icon: Table, label: "Tables", active: false },
-  { icon: CreditCard, label: "Billing", active: false },
-  { icon: ArrowLeftRight, label: "RTL", active: false },
+  { icon: LayoutDashboard, label: "Dashboard", active: true },
+  { icon: Ship, label: "Shipments", active: false },
+  { icon: FileText, label: "Documents", active: false },
+  { icon: MapPin, label: "Lane Analytics", active: false },
+  { icon: Table, label: "Reports", active: false },
 ];
 
 const accountPages = [
   { icon: User, label: "Profile", active: false },
-  { icon: LogIn, label: "Sign In", active: false },
-  { icon: UserPlus, label: "Sign Up", active: false },
+  { icon: Settings, label: "Settings", active: false },
+  { icon: LogIn, label: "Sign Out", active: false },
 ];
 
 export const Sidebar = () => {
@@ -24,11 +25,11 @@ export const Sidebar = () => {
     >
       {/* Logo */}
       <div className="flex items-center gap-3 px-4 py-3 mb-6">
-        <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-foreground">
-          <span className="text-xs font-bold text-background">◆</span>
+        <div className="flex h-8 w-8 items-center justify-center rounded-lg" style={{ background: "linear-gradient(127.09deg, #0075FF 19.41%, #00C6FB 76.65%)" }}>
+          <Truck className="h-4 w-4 text-foreground" />
         </div>
         <span className="text-sm font-semibold tracking-wide text-foreground">
-          VISION UI FREE
+          FREIGHTFLOW AI
         </span>
       </div>
 
@@ -51,7 +52,7 @@ export const Sidebar = () => {
         {/* Account Pages Section */}
         <div className="pt-6">
           <p className="px-4 text-xs font-medium uppercase tracking-wider text-muted-foreground mb-3">
-            Account Pages
+            Account
           </p>
           {accountPages.map((item, index) => (
             <motion.a
@@ -79,12 +80,12 @@ export const Sidebar = () => {
           background: "linear-gradient(127.09deg, rgba(6, 11, 40, 0.94) 19.41%, rgba(10, 14, 35, 0.49) 76.65%)",
         }}
       >
-        <div className="flex h-10 w-10 items-center justify-center rounded-xl mb-3" style={{ background: "linear-gradient(127.09deg, #0075FF 19.41%, #6C63FF 76.65%)" }}>
+        <div className="flex h-10 w-10 items-center justify-center rounded-xl mb-3" style={{ background: "linear-gradient(127.09deg, #0075FF 19.41%, #00C6FB 76.65%)" }}>
           <HelpCircle className="h-5 w-5 text-foreground" />
         </div>
         <p className="text-sm font-medium text-foreground mb-1">Need help?</p>
-        <p className="text-xs text-muted-foreground mb-3">Please check our docs</p>
-        <button className="w-full rounded-xl py-2.5 text-xs font-semibold text-foreground uppercase tracking-wide" style={{ background: "linear-gradient(127.09deg, #0075FF 19.41%, #6C63FF 76.65%)" }}>
+        <p className="text-xs text-muted-foreground mb-3">Contact our support team</p>
+        <button className="w-full rounded-xl py-2.5 text-xs font-semibold text-foreground uppercase tracking-wide" style={{ background: "linear-gradient(127.09deg, #0075FF 19.41%, #00C6FB 76.65%)" }}>
           <div className="flex items-center justify-center gap-2">
             <FileText className="h-4 w-4" />
             Documentation

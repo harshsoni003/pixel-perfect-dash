@@ -1,15 +1,15 @@
 import { motion } from "framer-motion";
-import { MoreHorizontal } from "lucide-react";
+import { MoreHorizontal, FileCheck } from "lucide-react";
 
-interface ReferralCardProps {
-  invited: number;
-  bonus: number;
-  safetyScore: number;
+interface AIDocumentEngineCardProps {
+  documentsProcessed: number;
+  ocrAccuracy: string;
+  avgConfidence: number;
 }
 
-export const ReferralCard = ({ invited, bonus, safetyScore }: ReferralCardProps) => {
+export const AIDocumentEngineCard = ({ documentsProcessed, ocrAccuracy, avgConfidence }: AIDocumentEngineCardProps) => {
   const circumference = 2 * Math.PI * 35;
-  const strokeDashoffset = circumference - (safetyScore / 10) * circumference;
+  const strokeDashoffset = circumference - (avgConfidence) * circumference;
 
   return (
     <motion.div
@@ -19,7 +19,10 @@ export const ReferralCard = ({ invited, bonus, safetyScore }: ReferralCardProps)
       className="glass-card p-5 h-full"
     >
       <div className="flex items-start justify-between mb-4">
-        <h3 className="text-sm font-semibold text-foreground">Referral Tracking</h3>
+        <div className="flex items-center gap-2">
+          <FileCheck className="h-4 w-4 text-accent" />
+          <h3 className="text-sm font-semibold text-foreground">AI Document Engine</h3>
+        </div>
         <button className="p-1 text-muted-foreground hover:text-foreground transition-colors">
           <MoreHorizontal className="h-4 w-4" />
         </button>
@@ -29,16 +32,16 @@ export const ReferralCard = ({ invited, bonus, safetyScore }: ReferralCardProps)
         {/* Stats */}
         <div className="flex-1 space-y-4">
           <div className="glass-card p-3 rounded-xl">
-            <p className="text-xs text-muted-foreground mb-0.5">Invited</p>
-            <p className="text-lg font-bold text-foreground">{invited} people</p>
+            <p className="text-xs text-muted-foreground mb-0.5">Docs Processed</p>
+            <p className="text-lg font-bold text-foreground">{documentsProcessed.toLocaleString()}</p>
           </div>
           <div className="glass-card p-3 rounded-xl">
-            <p className="text-xs text-muted-foreground mb-0.5">Bonus</p>
-            <p className="text-lg font-bold text-foreground">{bonus.toLocaleString()}</p>
+            <p className="text-xs text-muted-foreground mb-0.5">OCR Accuracy</p>
+            <p className="text-lg font-bold text-success">{ocrAccuracy}</p>
           </div>
         </div>
 
-        {/* Safety Score */}
+        {/* Confidence Score */}
         <div className="flex flex-col items-center justify-center">
           <div className="relative">
             <svg className="w-24 h-24 progress-ring" viewBox="0 0 80 80">
@@ -56,7 +59,7 @@ export const ReferralCard = ({ invited, bonus, safetyScore }: ReferralCardProps)
                 cx="40"
                 cy="40"
                 r="35"
-                stroke="url(#referralGradient)"
+                stroke="url(#confidenceGradient)"
                 strokeWidth="6"
                 fill="none"
                 strokeLinecap="round"
@@ -68,7 +71,7 @@ export const ReferralCard = ({ invited, bonus, safetyScore }: ReferralCardProps)
                 }}
               />
               <defs>
-                <linearGradient id="referralGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                <linearGradient id="confidenceGradient" x1="0%" y1="0%" x2="100%" y2="0%">
                   <stop offset="0%" stopColor="#0075FF" />
                   <stop offset="100%" stopColor="#00C6FB" />
                 </linearGradient>
@@ -77,9 +80,9 @@ export const ReferralCard = ({ invited, bonus, safetyScore }: ReferralCardProps)
             
             {/* Center content */}
             <div className="absolute inset-0 flex flex-col items-center justify-center">
-              <span className="text-xs text-muted-foreground">Safety</span>
-              <span className="text-2xl font-bold text-foreground">{safetyScore}</span>
-              <span className="text-xs text-muted-foreground">Total Score</span>
+              <span className="text-xs text-muted-foreground">Confidence</span>
+              <span className="text-xl font-bold text-foreground">{(avgConfidence * 100).toFixed(0)}%</span>
+              <span className="text-xs text-muted-foreground">Avg Score</span>
             </div>
           </div>
         </div>
