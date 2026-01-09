@@ -4,13 +4,14 @@ import { motion } from "framer-motion";
 interface StatsCardProps {
   title: string;
   value: string;
-  change: string;
-  isPositive: boolean;
+  change?: string;
+  isPositive?: boolean;
   icon: LucideIcon;
   index?: number;
+  subtitle?: string;
 }
 
-export const StatsCard = ({ title, value, change, isPositive, icon: Icon, index = 0 }: StatsCardProps) => {
+export const StatsCard = ({ title, value, change, isPositive = true, icon: Icon, index = 0, subtitle }: StatsCardProps) => {
   return (
     <motion.div
       initial={{ y: 20, opacity: 0 }}
@@ -23,10 +24,15 @@ export const StatsCard = ({ title, value, change, isPositive, icon: Icon, index 
           <p className="text-xs text-muted-foreground mb-1">{title}</p>
           <div className="flex items-baseline gap-2">
             <span className="text-lg font-bold text-foreground">{value}</span>
-            <span className={`text-xs font-medium ${isPositive ? "text-success" : "text-destructive"}`}>
-              {change}
-            </span>
+            {change && (
+              <span className={`text-xs font-medium ${isPositive ? "text-success" : "text-destructive"}`}>
+                {change}
+              </span>
+            )}
           </div>
+          {subtitle && (
+            <p className="text-xs text-muted-foreground mt-1">{subtitle}</p>
+          )}
         </div>
         <div className="stat-icon">
           <Icon className="h-5 w-5 text-foreground" />
